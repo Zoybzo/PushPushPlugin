@@ -9,5 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProjectEntity {
     private String projectName; // 项目名称
-    private Integer duration; // 打卡间隔时间
+    private Integer duration; // 打卡间隔时间 Unit:hour
+
+    public ProjectEntity(String projectName) {
+        this.projectName = projectName;
+        this.duration = 24;
+    }
+
 }

@@ -1,15 +1,19 @@
 package com.zoybzo;
 
+import io.ktor.client.features.Sender;
+import net.mamoe.mirai.contact.Member;
 import net.mamoe.mirai.event.*;
 import net.mamoe.mirai.event.events.GroupMessageEvent;
 
 public class ActiveCommand extends SimpleListenerHost {
     private String[] cmd;
+    private Member sender;
 
     @EventHandler
     private ListeningStatus groupEvent(GroupMessageEvent event) {
         ListeningStatus status = ListeningStatus.LISTENING;
         String s = event.getMessage().contentToString();
+        sender = event.getSender();
         // judge cmd
         if (!s.startsWith("%")) return status;
         // split
@@ -61,19 +65,28 @@ public class ActiveCommand extends SimpleListenerHost {
     }
 
     private void pushCmd() {
-
+        // %push <project name>
+        // 让这个用户在这个项目上打卡 需要判断一下这个用户当前的打卡时间与它上一次的打卡时间的间隔是否大于该项目的打卡间隔
+        // 如果这个项目不存在 则创建一个这个项目
     }
 
     // 需要权限
     private void removePush() {
-
+        // %rm <project name>
+        // 判断这个项目是否存在
+        // 判断这个用户的权限是否足够（需要看权限部分的代码 建议留给我）
     }
 
+    @Deprecated
     private void joinPush() {
-
+        // %我要卷 <project name>
+        // 加入到某个打卡中
+        // 不要了
     }
 
     private void quitPush() {
+        // %倒了 <project name>
+
     }
 
     private void getHelpInfo() {
