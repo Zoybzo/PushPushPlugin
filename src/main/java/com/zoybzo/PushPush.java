@@ -12,6 +12,9 @@ public final class PushPush extends JavaPlugin {
                 .name("PushPush")
                 .author("Zoybzo")
                 .build());
+        // init
+        // 从文件中读取信息
+
     }
 
     @Override
