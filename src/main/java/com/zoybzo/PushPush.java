@@ -18,5 +18,6 @@ public final class PushPush extends JavaPlugin {
     public void onEnable() {
         getLogger().info("Plugin loaded!");
         GlobalEventChannel.INSTANCE.registerListenerHost(new test());
+        GlobalEventChannel.INSTANCE.registerListenerHost(new Command());
     }
 }
