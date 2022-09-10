@@ -21,6 +21,14 @@ public class PushList {
         this.pushEntityList = new ArrayList<>();
     }
 
+    public List<PushEntity> getPushEntityList() {
+        return pushEntityList;
+    }
+
+    public void setPushEntityList(List<PushEntity> pushEntityList) {
+        this.pushEntityList = pushEntityList;
+    }
+
     public boolean pushNow(GroupMessageEvent event, String projectName) {
         Date nowDate = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(ConstUtil.DATE_PATTERN);
@@ -29,10 +37,10 @@ public class PushList {
             PushEntity pushEntity = new PushEntity(
                     String.valueOf(event.getSender().getId()),
                     new ProjectEntity(projectName),
-                    1,
-                    0,
+                    ConstUtil.DEFAULT_CURRENT_DURATION,
+                    ConstUtil.DEFAULT_LONGEST_DURATION,
                     simpleDateFormat.format(nowDate),
-                    24
+                    ConstUtil.DEFAULT_PUSH_TIME
             );
             pushEntityList.add(pushEntity);
             ResponseUtil.responsePushSucceed(event, pushEntity.toString2User());
@@ -44,7 +52,7 @@ public class PushList {
                 long currentPushTime = nowDate.getTime();
                 long diff = (currentPushTime - lastPushTime); // ms
                 if (diff <= ConstUtil.DAY_MS) {
-                    ResponseUtil.responsePushTooFrequency(event);
+                    ResponseUtil.responsePushTooFrequency(event, it.toString2User());
                     return false;
                 }
             } catch (ParseException e) {
@@ -62,7 +70,7 @@ public class PushList {
     }
 
     private int findByName(String id, String projectName) {
-        for (int i = 0; i < this.pushEntityList.size(); i++) {
+        for (int i = ConstUtil.LOOP_BEGIN; i < this.pushEntityList.size(); i++) {
             PushEntity it = pushEntityList.get(i);
             if (it != null && it.getId().equals(String.valueOf(id)) && it.getProject().getProjectName().equals(projectName)) {
                 // check duration
@@ -72,4 +80,10 @@ public class PushList {
         return -1;
     }
 
+    @Override
+    public String toString() {
+        return "PushList{" +
+                "pushEntityList=" + pushEntityList +
+                '}';
+    }
 }

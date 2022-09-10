@@ -5,6 +5,8 @@ import com.alibaba.fastjson2.JSONObject;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class JsonUtil {
     /**
@@ -14,17 +16,16 @@ public class JsonUtil {
      * @param object    需要被转换的 Object
      */
     public static void object2JsonFile(String finalPath, Object object) {
-        JSONObject jsonObject = (JSONObject) JSON.toJSON(object);
-
+        String jsonString = JSON.toJSONString(object);
         try {
-            OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(finalPath), StandardCharsets.UTF_8);
-            osw.write(jsonObject.toJSONString());
+            OutputStreamWriter osw = new OutputStreamWriter(Files.newOutputStream(Paths.get(finalPath)), StandardCharsets.UTF_8);
+            osw.write(jsonString);
             osw.flush();
             osw.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(jsonObject.toJSONString());
+        System.out.println(jsonString);
     }
 
     /**

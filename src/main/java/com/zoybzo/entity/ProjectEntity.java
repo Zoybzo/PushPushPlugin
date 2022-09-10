@@ -33,4 +33,11 @@ public class ProjectEntity {
         this.duration = 24;
     }
 
+    @Override
+    public String toString() {
+        return "ProjectEntity{" +
+                "projectName='" + projectName + '\'' +
+                ", duration=" + duration +
+                '}';
+    }
 }

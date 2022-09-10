@@ -84,6 +84,13 @@ public class PushEntity {
     }
 
     public String toString2User() {
-        return "你的ID='" + id + '\'' + ", 打卡目标=" + project + ", 当前连续打卡次数=" + currentDuration + ", 最长连续打卡次数=" + longestDuration + ", 上次打卡时间='" + lastPushTime + '\'' + ", 打卡提醒周期=" + pushTime + "\n";
+        return "🤞你的ID='" + id + '\'' +
+                "\n❤打卡任务=" + project.getProjectName() +
+                "\n💖打卡刷新周期=" + project.getDuration() +
+                "\n👌当前连续打卡次数=" + currentDuration +
+                "\n✌最长连续打卡次数=" + longestDuration +
+                "\n🌹上次打卡时间='" + lastPushTime + '\'' +
+                "\n✔打卡提醒周期=" + pushTime +
+                "\n";
     }
 }

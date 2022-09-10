@@ -1,10 +1,9 @@
 package com.zoybzo;
 
-import com.zoybzo.entity.ProjectEntity;
+import com.zoybzo.cmd.ActiveCommand;
+import com.zoybzo.cmd.test;
 import com.zoybzo.entity.ProjectList;
 import com.zoybzo.entity.PushList;
-import com.zoybzo.utils.ConstUtil;
-import com.zoybzo.utils.JsonUtil;
 import net.mamoe.mirai.console.plugin.jvm.JavaPlugin;
 import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescriptionBuilder;
 import net.mamoe.mirai.event.GlobalEventChannel;
@@ -27,7 +26,7 @@ public final class PushPush extends JavaPlugin {
     @Override
     public void onEnable() {
         getLogger().info("Plugin loaded!");
-//        GlobalEventChannel.INSTANCE.registerListenerHost(new test());
+        GlobalEventChannel.INSTANCE.registerListenerHost(new test());
         GlobalEventChannel.INSTANCE.registerListenerHost(new ActiveCommand());
     }
 }

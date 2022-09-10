@@ -1,5 +1,6 @@
-package com.zoybzo;
+package com.zoybzo.cmd;
 
+import com.zoybzo.DataCache;
 import com.zoybzo.entity.ProjectEntity;
 import com.zoybzo.entity.ProjectList;
 import com.zoybzo.entity.PushEntity;
@@ -64,11 +65,19 @@ public class ActiveCommand extends SimpleListenerHost {
                 getHelpInfo();
                 break;
             }
+            case "save": { // 存储文件
+                saveJson();
+                break;
+            }
             default: {
                 break;
             }
         }
         return ListeningStatus.LISTENING;
+    }
+
+    private boolean saveJson() {
+        return DataCache.getInstance().save();
     }
 
     private boolean pushCmd() {
